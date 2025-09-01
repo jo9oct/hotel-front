@@ -3,14 +3,14 @@
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",          // ✅ important for React 18
+    "jsx": "react-jsx",             // ✅ correct for React 18
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] },
-    "types": ["vite/client"]      // ✅ needed for Vite globals
+    "types": ["vite/client"]        // ✅ needed for Vite globals
   },
   "include": ["src"]
 }

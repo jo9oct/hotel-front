@@ -7,15 +7,18 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "0.0.0.0",
     port: 8080,
-    allowedHosts: ["hotel-front-021.onrender.com"]
+    allowedHosts: ["hotel-front-021.onrender.com"],
   },
   plugins: [
-    react(),                     // ✅ SWC plugin compiles JSX
+    react(),                       // ✅ just call react(), no jsxDev option
     mode === "development" && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    target: "esnext",
   },
 }));
