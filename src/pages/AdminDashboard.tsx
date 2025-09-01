@@ -8,20 +8,23 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { FaPlus, FaEdit, FaTrash, FaUtensils } from 'react-icons/fa';
 import { foodData } from '@/types/food';
-import { useNavigate } from 'react-router-dom';
 import {Loader1} from "@/lib/Loader"
 import {  PulseLoader } from "react-spinners";
 
 export const AdminDashboard: React.FC = () => {
-
-  const navigate=useNavigate()
 
   const {  addMenuItem,getMenuItem,Food, updateMenuItem, deleteMenuItem, loading } = useStore();
   const { toast } = useToast();
   const [isAddingItem, setIsAddingItem] = useState(false);
   const [editingItem, setEditingItem] = useState<foodData | null>(null);
   const [ID,setID] = useState <string>()
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    description: string;
+    price: number | null;
+    image: string;
+    category: string;
+  }>({
     name: '',
     description: '',
     price: null,
@@ -60,11 +63,11 @@ export const AdminDashboard: React.FC = () => {
 
     if(editingItem !== null){
       updateMenuItem(formData.name,
-                  formData.price,
+                  String(formData.price || "0"),
                   formData.description,
                   formData.image,
                   formData.category || "Main Course",
-                  ID
+                  ID || ""
       )
 
       toast({
@@ -75,7 +78,7 @@ export const AdminDashboard: React.FC = () => {
     }
     else{
       await addMenuItem(formData.name,
-                  formData.price,
+                  String(formData.price || "0"),
                   formData.description,
                   formData.image,
                   formData.category || "Main Course"
@@ -176,8 +179,8 @@ export const AdminDashboard: React.FC = () => {
                       id="price"
                       type="number"
                       step="0.01"
-                      value={formData.price}
-                      onChange={(e) => setFormData({...formData, price: e.target.value})}
+                      value={formData.price ?? ''}
+                      onChange={(e) => setFormData({...formData, price: parseFloat(e.target.value) || null})}
                       placeholder="0.00"
                       required
                     />
