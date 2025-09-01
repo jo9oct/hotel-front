@@ -3,7 +3,7 @@
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",             // ✅ correct for React 18
+    "jsx": "react-jsx",          // ✅ correct for React 18
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,

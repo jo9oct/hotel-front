@@ -7,7 +7,6 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "0.0.0.0",
     port: 8080,
-    allowedHosts: ["hotel-front-021.onrender.com"],
   },
   plugins: [
     react(),                       // ✅ just call react(), no jsxDev option
