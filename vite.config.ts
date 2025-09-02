@@ -7,8 +7,8 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "0.0.0.0",  
     allowedHosts: [
-      "localhost",                        // local dev
-      "your-frontend.onrender.com",       // ✅ replace with your actual Render frontend domain
+      "localhost",                                  // local dev
+      "https://hotel-menu-ejwp.onrender.com",       // ✅ replace with your actual Render frontend domain
     ],
   },
   plugins: [
