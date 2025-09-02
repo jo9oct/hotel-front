@@ -7,7 +7,7 @@ export default defineConfig({
     host: "0.0.0.0",  // allow access from all network interfaces
     allowedHosts: [
       "localhost",                       // local development
-      "hotel-menu-21.onrender.com",      // your Render frontend domain
+      "hotel-menu-30.onrender.com",      // your Render frontend domain
     ],
   },
   plugins: [
