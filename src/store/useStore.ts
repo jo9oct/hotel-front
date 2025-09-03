@@ -139,6 +139,7 @@ export const useStore = create<AppState>()(
         try {
           await api.patch(`/order/${id}`, { OrderStatus: status });
           console.log("Order status updated successfully");
+          window.location.reload();
         } catch (error) {
           console.error("Error updating status", error);
         } finally {
