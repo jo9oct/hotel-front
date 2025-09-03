@@ -33,8 +33,6 @@ export const Menu: React.FC = () => {
   const navigate=useNavigate()
   const location = useLocation();
   const status = location.state?.status;
-  console.log("jo jo jo " ,Food)
-  console.log(status);
 
   useEffect(() => {
     const FetchFood = async () => {
