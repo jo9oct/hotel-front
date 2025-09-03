@@ -25,9 +25,11 @@ export const AdminOrders: React.FC = () => {
   const handleStatusUpdate = async (orderId: string, newStatus: string) => {
     if (newStatus === "pending"){
       await updateStatus(orderId, "preparing");
+      window.location.reload();
     }
     else if (newStatus === "preparing"){
       await updateStatus(orderId, "delivered");
+      window.location.reload();
     }
     
     toast({
@@ -39,9 +41,11 @@ export const AdminOrders: React.FC = () => {
   const StatusTrackBack = async (orderId: string, newStatus: string) => {
     if (newStatus === "preparing"){
       await updateStatus(orderId, "pending");
+      window.location.reload();
     }
     else if (newStatus === "delivered"){
       await updateStatus(orderId, "preparing");
+      window.location.reload();
     }
     
   };
@@ -74,8 +78,8 @@ export const AdminOrders: React.FC = () => {
 
   const DeleteOrder = async (orderId: string) => {
     await deleteOrder(orderId)
+    window.location.reload();
   }
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-warm-cream to-background">

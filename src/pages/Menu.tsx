@@ -100,7 +100,7 @@ const handleOrderConfirm = async () => {
   
     // Add order once a unique ID is found
     await addOrder(selectedFoods, orderType, Number(orderNumber), "pending", id);
-
+    window.location.reload();
     const key=`order-${id}`
     localStorage.setItem(key ,  id.toString())
 

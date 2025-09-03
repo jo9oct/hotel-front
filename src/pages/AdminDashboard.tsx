@@ -69,7 +69,7 @@ export const AdminDashboard: React.FC = () => {
                   formData.category || "Main Course",
                   ID || ""
       )
-
+      window.location.reload();
       toast({
         title: "Item Updated",
         description: `Menu Updated Successfully.`,
@@ -82,7 +82,7 @@ export const AdminDashboard: React.FC = () => {
                   formData.image,
                   formData.category || "Main Course"
       )
-
+      window.location.reload();
       toast({
         title: "Item Added",
         description: `Menu Added Successfully.`,
@@ -111,6 +111,7 @@ export const AdminDashboard: React.FC = () => {
 
   const handleDelete = async (item: foodData) => {
     await deleteMenuItem(item._id)
+    window.location.reload();
     toast({
       title: "Item Deleted",
       description: `Menu Deleted Successfully.`,
