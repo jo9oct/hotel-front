@@ -61,7 +61,7 @@ export const useAuthStore = create<AuthState>()(
           const res = await axios.post(`${API_BASE_URL}/auth/Login`, {
             username,
             password,
-          });
+          }, { withCredentials: true });
           if (res.data?.user) {
             set({ user: res.data.user, isAuthenticated: true });
           } else {
