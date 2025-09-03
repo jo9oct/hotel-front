@@ -16,7 +16,10 @@ export const AdminOrders: React.FC = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    getOrder()
+    const fetchOrders = async () => {
+      await getOrder();
+    };
+    fetchOrders();
   },[])
 
   const handleStatusUpdate = async (orderId: string, newStatus: string) => {
@@ -35,13 +38,13 @@ export const AdminOrders: React.FC = () => {
     });
   };
 
-  const StatusTrackBack = (orderId: string, newStatus: string) => {
+  const StatusTrackBack = async (orderId: string, newStatus: string) => {
     if (newStatus === "preparing"){
-      updateStatus(orderId, "pending");
+      await updateStatus(orderId, "pending");
       window.location.reload();
     }
     else if (newStatus === "delivered"){
-      updateStatus(orderId, "preparing");
+      await updateStatus(orderId, "preparing");
       window.location.reload();
     }
     
@@ -73,8 +76,8 @@ export const AdminOrders: React.FC = () => {
     }
   };
 
-  const DeleteOrder = (orderId: string) => {
-    deleteOrder(orderId)
+  const DeleteOrder = async (orderId: string) => {
+    await deleteOrder(orderId)
     window.location.reload();
   }
 

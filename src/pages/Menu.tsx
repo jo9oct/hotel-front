@@ -32,7 +32,6 @@ export const Menu: React.FC = () => {
   
   const navigate=useNavigate()
   const location = useLocation();
-  const status = location.state?.status;
 
   useEffect(() => {
     const FetchFood = async () => {
@@ -42,7 +41,10 @@ export const Menu: React.FC = () => {
   }, [getMenuItem]);
 
   useEffect(() => {
-    getOrder()
+    const FetchOrder = async () => {
+      await getOrder();
+    };
+    FetchOrder();
   },[])
 
   const UpdateOrder = (order: orderData) => {
@@ -85,7 +87,7 @@ export const Menu: React.FC = () => {
 const handleOrderConfirm = async () => {
 
   if(update){
-    updateOrder(selectedFoods, orderType, Number(orderNumber), "pending", Number(OrderId),DBi_d);
+    await updateOrder(selectedFoods, orderType, Number(orderNumber), "pending", Number(OrderId),DBi_d);
     navigate("/favorites")
     window.location.reload();
   }
@@ -98,7 +100,7 @@ const handleOrderConfirm = async () => {
     } while (Order.some(order => order.OrderId === id));
   
     // Add order once a unique ID is found
-    addOrder(selectedFoods, orderType, Number(orderNumber), "pending", id);
+    await addOrder(selectedFoods, orderType, Number(orderNumber), "pending", id);
 
     const key=`order-${id}`
     localStorage.setItem(key ,  id.toString())

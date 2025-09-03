@@ -62,7 +62,7 @@ export const AdminDashboard: React.FC = () => {
     }
 
     if(editingItem !== null){
-      updateMenuItem(formData.name,
+      await updateMenuItem(formData.name,
                   String(formData.price || "0"),
                   formData.description,
                   formData.image,
@@ -112,7 +112,7 @@ export const AdminDashboard: React.FC = () => {
   };
 
   const handleDelete = async (item: foodData) => {
-    deleteMenuItem(item._id)
+    await deleteMenuItem(item._id)
     toast({
       title: "Item Deleted",
       description: `Menu Deleted Successfully.`,

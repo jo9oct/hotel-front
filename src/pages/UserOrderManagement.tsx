@@ -18,7 +18,10 @@ export const MyOrder: React.FC = () => {
   const navigate=useNavigate()
 
   useEffect(() => {
-    getOrder();
+    const fetchOrders = async () => {
+      await getOrder();
+    }
+    fetchOrders();
   }, []);
 
   useEffect(() => {
@@ -62,9 +65,9 @@ export const MyOrder: React.FC = () => {
     });
   };
 
-  const DeleteOrder = (orderId: string) => {
+  const DeleteOrder = async (orderId: string) => {
 
-      deleteOrder(orderId)
+      await deleteOrder(orderId)
       window.location.reload();
       toast({
         title: "Order Deleted Successfully",
