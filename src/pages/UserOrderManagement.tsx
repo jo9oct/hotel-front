@@ -66,13 +66,24 @@ export const MyOrder: React.FC = () => {
   };
 
   const DeleteOrder = async (orderId: string) => {
-
-      await deleteOrder(orderId)
-      window.location.reload();
-      toast({
-        title: "Order Deleted Successfully",
-        description: "you are delete the current order"
-      });
+      try{
+        await deleteOrder(orderId)
+        toast({
+          title: "Order Deleted Successfully",
+          description: "you are delete the current order"
+        });
+      }
+      catch(error){
+        console.error("Error deleting order", error);
+        toast({
+          title: "Error!",
+          description: "Failed to delete order. Please try again.",
+          variant: "destructive",
+        });
+      }
+      finally{
+        await getOrder()
+      }
   }
 
   return (

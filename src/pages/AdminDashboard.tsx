@@ -61,32 +61,43 @@ export const AdminDashboard: React.FC = () => {
       });
     }
 
-    if(editingItem !== null){
-      await updateMenuItem(formData.name,
-                  String(formData.price || "0"),
-                  formData.description,
-                  formData.image,
-                  formData.category || "Main Course",
-                  ID || ""
-      )
-      window.location.reload();
+    try{
+      if(editingItem !== null){
+        await updateMenuItem(formData.name,
+                    String(formData.price || "0"),
+                    formData.description,
+                    formData.image,
+                    formData.category || "Main Course",
+                    ID || ""
+        )
+        toast({
+          title: "Item Updated",
+          description: `Menu Updated Successfully.`,
+        });
+      }
+      else{
+        await addMenuItem(formData.name,
+                    String(formData.price || "0"),
+                    formData.description,
+                    formData.image,
+                    formData.category || "Main Course"
+        )
+        toast({
+          title: "Item Added",
+          description: `Menu Added Successfully.`,
+        });
+      }
+    }
+    catch (error) {
+      console.error("Error submitting form", error);
       toast({
-        title: "Item Updated",
-        description: `Menu Updated Successfully.`,
+        title: "Submission Error",
+        description: "There was an error submitting the form. Please try again.",
+        variant: "destructive",
       });
     }
-    else{
-      await addMenuItem(formData.name,
-                  String(formData.price || "0"),
-                  formData.description,
-                  formData.image,
-                  formData.category || "Main Course"
-      )
-      window.location.reload();
-      toast({
-        title: "Item Added",
-        description: `Menu Added Successfully.`,
-      });
+    finally{
+      await getMenuItem()
     }
 
     resetForm();
@@ -110,12 +121,24 @@ export const AdminDashboard: React.FC = () => {
   };
 
   const handleDelete = async (item: foodData) => {
-    await deleteMenuItem(item._id)
-    window.location.reload();
-    toast({
-      title: "Item Deleted",
-      description: `Menu Deleted Successfully.`,
-    });
+    try{
+      await deleteMenuItem(item._id)
+      toast({
+        title: "Item Deleted",
+        description: `Menu Deleted Successfully.`,
+      });
+    }
+    catch (error) {
+      console.error("Error deleting item", error);
+      toast({
+        title: "Deletion Error",
+        description: "There was an error deleting the item. Please try again.",
+        variant: "destructive",
+      });
+    }
+    finally{
+      await getMenuItem()
+    }
   };
 
   return (

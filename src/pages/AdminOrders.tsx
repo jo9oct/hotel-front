@@ -23,27 +23,52 @@ export const AdminOrders: React.FC = () => {
   },[])
 
   const handleStatusUpdate = async (orderId: string, newStatus: string) => {
-    if (newStatus === "pending"){
-      await updateStatus(orderId, "preparing");
+    try{
+      if (newStatus === "pending"){
+        await updateStatus(orderId, "preparing");
+      }
+      else if (newStatus === "preparing"){
+        await updateStatus(orderId, "delivered");
+      }
+      
+      toast({
+        title: "Order Status Updated",
+        description: `Order has been marked as ${newStatus}.`,
+      });
     }
-    else if (newStatus === "preparing"){
-      await updateStatus(orderId, "delivered");
+    catch (error) {
+      console.error("Status update error", error);
+      toast({
+        title: "Error",
+        description: "Failed to update order status. Please try again.",
+        variant: "destructive",
+      });
     }
-    
-    toast({
-      title: "Order Status Updated",
-      description: `Order has been marked as ${newStatus}.`,
-    });
+    finally{
+      await getOrder()
+    }
   };
 
   const StatusTrackBack = async (orderId: string, newStatus: string) => {
-    if (newStatus === "preparing"){
-      await updateStatus(orderId, "pending");
+    try{
+      if (newStatus === "preparing"){
+        await updateStatus(orderId, "pending");
+      }
+      else if (newStatus === "delivered"){
+        await updateStatus(orderId, "preparing");
+      }
     }
-    else if (newStatus === "delivered"){
-      await updateStatus(orderId, "preparing");
+    catch (error) {
+      console.error("Status update error", error);
+      toast({
+        title: "Error",
+        description: "Failed to update order status. Please try again.",
+        variant: "destructive",
+      });
     }
-    
+    finally{
+      await getOrder()
+    }
   };
 
   const getStatusIcon = (status: string) => {
@@ -73,8 +98,20 @@ export const AdminOrders: React.FC = () => {
   };
 
   const DeleteOrder = async (orderId: string) => {
-    await deleteOrder(orderId)
-    window.location.reload();
+    try{
+      await deleteOrder(orderId)
+    }
+    catch (error) {
+      console.error("Delete order error", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete order. Please try again.",
+        variant: "destructive",
+      });
+    }
+    finally{
+      await getOrder()
+    }
   }
 
   return (

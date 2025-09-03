@@ -18,10 +18,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {orderData} from "@/types/order"
 import {Loader1} from "@/lib/Loader"
 import {  PulseLoader } from "react-spinners";
+import { useToast } from '@/hooks/use-toast';
 
 export const Menu: React.FC = () => {
   const { getMenuItem, Food, addOrder , getOrder ,updateOrder , Order , loading} = useStore();
 
+  const { toast } = useToast();
   const [isOrderDialogOpen, setIsOrderDialogOpen] = useState(false);
   const [selectedFoods, setSelectedFoods] = useState<foodData[]>([]); // full food items
   const [orderType, setOrderType] = useState(""); // chair or room
@@ -98,12 +100,23 @@ const handleOrderConfirm = async () => {
       id = Math.floor(Math.random() * 1000000);
     } while (Order.some(order => order.OrderId === id));
   
-    // Add order once a unique ID is found
-    await addOrder(selectedFoods, orderType, Number(orderNumber), "pending", id);
-    window.location.reload();
-    const key=`order-${id}`
-    localStorage.setItem(key ,  id.toString())
-
+    try{ 
+      // Add order once a unique ID is found
+      await addOrder(selectedFoods, orderType, Number(orderNumber), "pending", id);
+      const key=`order-${id}`
+      localStorage.setItem(key ,  id.toString())
+    }
+    catch(error){
+      console.error("Error adding order", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete order. Please try again.",
+        variant: "destructive",
+      });
+    }
+    finally{
+      await getMenuItem()
+    }
   }
 
   // reset after confirm
