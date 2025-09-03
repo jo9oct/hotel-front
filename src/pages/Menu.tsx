@@ -89,7 +89,6 @@ const handleOrderConfirm = async () => {
   if(update){
     await updateOrder(selectedFoods, orderType, Number(orderNumber), "pending", Number(OrderId),DBi_d);
     navigate("/favorites")
-    window.location.reload();
   }
   else{
     let id: number;

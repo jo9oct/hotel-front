@@ -77,7 +77,6 @@ export const Navigation: React.FC<UserAccountPopupProps> = ({ handleUpdateAccoun
   const handleLogoutClick = async () => {
     await logout();
     navigate("/");
-    window.location.reload();
   };
 
   const isActive = (path: string) => location.pathname === path;

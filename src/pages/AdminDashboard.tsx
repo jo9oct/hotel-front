@@ -74,7 +74,6 @@ export const AdminDashboard: React.FC = () => {
         title: "Item Updated",
         description: `Menu Updated Successfully.`,
       });
-      window.location.reload();
     }
     else{
       await addMenuItem(formData.name,
@@ -88,7 +87,6 @@ export const AdminDashboard: React.FC = () => {
         title: "Item Added",
         description: `Menu Added Successfully.`,
       });
-      window.location.reload();
     }
 
     resetForm();
@@ -117,7 +115,6 @@ export const AdminDashboard: React.FC = () => {
       title: "Item Deleted",
       description: `Menu Deleted Successfully.`,
     });
-    window.location.reload();
   };
 
   return (

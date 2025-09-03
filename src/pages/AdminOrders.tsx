@@ -24,12 +24,10 @@ export const AdminOrders: React.FC = () => {
 
   const handleStatusUpdate = async (orderId: string, newStatus: string) => {
     if (newStatus === "pending"){
-      updateStatus(orderId, "preparing");
-      window.location.reload();
+      await updateStatus(orderId, "preparing");
     }
     else if (newStatus === "preparing"){
-      updateStatus(orderId, "delivered");
-      window.location.reload();
+      await updateStatus(orderId, "delivered");
     }
     
     toast({
@@ -41,11 +39,9 @@ export const AdminOrders: React.FC = () => {
   const StatusTrackBack = async (orderId: string, newStatus: string) => {
     if (newStatus === "preparing"){
       await updateStatus(orderId, "pending");
-      window.location.reload();
     }
     else if (newStatus === "delivered"){
       await updateStatus(orderId, "preparing");
-      window.location.reload();
     }
     
   };
@@ -78,7 +74,6 @@ export const AdminOrders: React.FC = () => {
 
   const DeleteOrder = async (orderId: string) => {
     await deleteOrder(orderId)
-    window.location.reload();
   }
 
 
