@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import api from "../lib/axios.ts";
-import type { foodData } from "../types/food.ts";
-import type { orderData } from "../types/order.ts";
+import api from "../lib/axios";
+import type { foodData } from "../types/food";
+import type { orderData } from "../types/order";
 
 export interface AppState {
   loading: boolean;
