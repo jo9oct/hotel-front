@@ -36,6 +36,7 @@ export const AdminLogin: React.FC = () => {
         description: "Successfully logged in to admin panel.",
       });
       navigate('/admin/dashboard');
+      window.location.reload();
     } catch (error) {
       console.error("Login error", error);
       toast({
