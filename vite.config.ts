@@ -3,22 +3,14 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  server: {
-    host: "0.0.0.0",  // allow access from all network interfaces
-    allowedHosts: [
-      "localhost",                       // local development
-      "hotel-menu-27.onrender.com",      // your Render frontend domain
-    ],
-  },
-  plugins: [
-    react(),  // React plugin for Vite
-  ],
+  base: "/", // production base path
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),  // use @ to reference src folder
+      "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
-    target: "esnext",  // modern JS output
+    target: "esnext",
   },
 });
