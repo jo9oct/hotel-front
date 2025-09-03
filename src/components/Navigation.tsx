@@ -76,6 +76,7 @@ export const Navigation: React.FC<UserAccountPopupProps> = ({ handleUpdateAccoun
 
   const handleLogoutClick = async () => {
     await logout();
+    setIsProfileOpen(false);
     navigate("/");
   };
 
