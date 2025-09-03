@@ -74,8 +74,8 @@ export const Navigation: React.FC<UserAccountPopupProps> = ({ handleUpdateAccoun
     }
   };
 
-  const handleLogoutClick = () => {
-    logout();
+  const handleLogoutClick = async () => {
+    await logout();
     navigate("/");
     window.location.reload();
   };
